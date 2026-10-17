@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edge-yolo"
+version = "0.1.0"
+description = "Fine-tune an Ultralytics YOLO detector and deploy it with ONNX Runtime and TensorRT."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Arpan Bom" }]
+keywords = ["yolo", "tensorrt", "onnxruntime", "jetson", "edge-ai"]
+dependencies = [
+  "numpy>=1.24",
+  "pyyaml>=6",
+]
+
+[project.optional-dependencies]
+train = ["ultralytics>=8.2"]
+onnx = ["onnxruntime>=1.17"]
+media = ["pillow>=10"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+edge-yolo = "edge_yolo.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/applycoding/edge-yolo-tensorrt"
+Documentation = "https://github.com/applycoding/edge-yolo-tensorrt/blob/main/docs/jetson.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["edge_yolo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
