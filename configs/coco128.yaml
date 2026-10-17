@@ -1,0 +1,19 @@
+# Fine-tune YOLOv8n on coco128, the 128-image COCO subset distributed with Ultralytics.
+# The first training run downloads that subset and the yolov8n checkpoint.
+# Set fraction below 1 to train on a smaller slice of the same set.
+model: yolov8n.pt
+data: coco128.yaml
+epochs: 20
+imgsz: 640
+batch: 8
+device: auto
+workers: 2
+patience: 10
+optimizer: auto
+lr0: 0.01
+project: runs/detect
+name: coco128
+exist_ok: true
+pretrained: true
+seed: 0
+fraction: 1.0
